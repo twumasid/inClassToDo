@@ -1,0 +1,39 @@
+
+/* Class = "UILabel"; text = "todo description"; ObjectID = "1MX-5B-KFZ"; */
+"1MX-5B-KFZ.text" = "todo description";
+
+/* Class = "UILabel"; text = "todo name"; ObjectID = "74P-VW-CUA"; */
+"74P-VW-CUA.text" = "todo name";
+
+/* Class = "UILabel"; text = "Date"; ObjectID = "Goe-UG-X3H"; */
+"Goe-UG-X3H.text" = "Date";
+
+/* Class = "UILabel"; text = "Complete?"; ObjectID = "HDN-4C-MjV"; */
+"HDN-4C-MjV.text" = "Complete?";
+
+/* Class = "UILabel"; accessibilityLabel = "Created On:"; ObjectID = "Oli-yM-RFJ"; */
+"Oli-yM-RFJ.accessibilityLabel" = "Created On:";
+
+/* Class = "UILabel"; text = "Created On:"; ObjectID = "Oli-yM-RFJ"; */
+"Oli-yM-RFJ.text" = "Created On:";
+
+/* Class = "UINavigationItem"; title = "todo list"; ObjectID = "Ovr-9b-obm"; */
+"Ovr-9b-obm.title" = "todo list";
+
+/* Class = "UITextField"; placeholder = "Enter ToDo Item"; ObjectID = "T9x-A6-aWh"; */
+"T9x-A6-aWh.placeholder" = "Enter ToDo Item";
+
+/* Class = "UIBarButtonItem"; title = "Cancel"; ObjectID = "Y2o-Ta-ryr"; */
+"Y2o-Ta-ryr.title" = "Cancel";
+
+/* Class = "UITextField"; text = "Due Date"; ObjectID = "aEc-ey-3nM"; */
+"aEc-ey-3nM.text" = "Due Date";
+
+/* Class = "UITextView"; text = "Description"; ObjectID = "eYV-8p-Clz"; */
+"eYV-8p-Clz.text" = "Description";
+
+/* Class = "UITextField"; text = "Location"; ObjectID = "nro-3E-ioI"; */
+"nro-3E-ioI.text" = "Location";
+
+/* Class = "UIBarButtonItem"; title = "Save"; ObjectID = "sBF-1I-CSx"; */
+"sBF-1I-CSx.title" = "Save";

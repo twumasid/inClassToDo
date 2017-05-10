@@ -8,35 +8,56 @@
 
 import UIKit
 
-
+//struct to contain a toDo item type made up of all todo properties
 struct toDoItemType {
-    var name : String!
-    var desc : String!
-    var date : String!
+    var name = "Todo"
+    var desc: String?
+    var dateCreated: Date?
     var completed = false
     var image = UIImage()
+    var dateDue: Date?
+    var location: String?
 }
 
-class ToDo: NSObject, NSCoding {
-//class ToDo: NSObject{
+var toDoManager: ToDo = ToDo()
 
+class ToDo: NSObject, NSCoding {
+    
+    //var to contain one toDo Item
     var toDoItem = toDoItemType()
+    
+    //an array to contain all toDo items in app
     var toDoItems = [toDoItemType]()
     
-    init?(name: String, desc: String, date: String, image: UIImage, completed: Bool) {
-        self.toDoItem.name = name
-        self.toDoItem.desc = desc
-        self.toDoItem.date = date
-        self.toDoItem.completed = completed
-        self.toDoItem.image = image
+    
+    //static let sharedInstance = ToDo()
+    
+    
+    override init() {
+        
     }
     
-    func addToDo (name: String, desc: String, date: String, complete: Bool, image: UIImage) {
-        toDoItems.append(toDoItemType(name: name, desc: desc, date: date, completed: complete, image: image))
+//    init(name: String) {
+//        self.toDoItem.name = name
+//    }
+    
+    
+    init?(name: String, desc: String, dateCreated: Date, image: UIImage, completed: Bool, dateDue: Date, location: String) {
+        self.toDoItem.name = name
+        self.toDoItem.desc = desc
+        self.toDoItem.dateCreated = dateCreated
+        self.toDoItem.completed = completed
+        self.toDoItem.image = image
+        self.toDoItem.dateDue = dateDue
+        self.toDoItem.location = location
+    }
+    
+    func addToDo (name: String, desc: String?, dateCreated: Date, complete: Bool, image: UIImage, dateDue: Date?, location: String?) {
+        toDoItems.append(toDoItemType(name: name, desc: desc, dateCreated: dateCreated, completed: complete, image: image, dateDue: dateDue, location: location))
     }
     
     func addToDoItem (toDo: toDoItemType) {
-        toDoItems.append(toDoItemType(name: toDo.name, desc: toDo.desc, date: toDo.date, completed: toDo.completed, image: toDo.image))
+        toDoItems.append(toDoItemType(name: toDo.name, desc: toDo.desc, dateCreated: toDo.dateCreated, completed: toDo.completed, image: toDo.image, dateDue: toDo.dateDue, location: toDo.location))
     }
     
     
@@ -50,7 +71,7 @@ class ToDo: NSObject, NSCoding {
     static let ArchiveURL = DocumentsDirectory.appendingPathComponent("todos")
     
     private func saveToDos() {
-        let isSuccessfulSave = NSKeyedArchiver.archiveRootObject(ToDo, toFile: ToDo.ArchiveURL.path)
+        let isSuccessfulSave = NSKeyedArchiver.archiveRootObject(toDoItemType(), toFile: ToDo.ArchiveURL.path)
         
         if isSuccessfulSave {
             print ("saved")
@@ -61,36 +82,42 @@ class ToDo: NSObject, NSCoding {
         
     }
     
-    private func loadTodos() {
-        return NSKeyedUnarchiver.unarchiveObject(withFile: Todo.ArchilveURL.path) as! [Todo]
+    private func loadTodos() -> [ToDo]?{
+        return NSKeyedUnarchiver.unarchiveObject(withFile: ToDo.ArchiveURL.path) as? [ToDo]
     }
     
     
-    
+    //a disctionary for saving data
     struct PropertyKey {
-        static let name = "toDo Name"
-        static let desc = "toDo Description"
-        static let date = "01-01-01"
+        static let name = "name"
+        static let desc = "desc"
+        static let dateCreated = "dateCreated"
         static let completed = "completed"
         static let image = "image"
+        static let dateDue = "dateDue"
+        static let location = "location"
     }
     
     func encode(with aCoder: NSCoder){
-        aCoder.encode(name, forKey: PropertyKey.name)
-        aCoder.encode(desc, forkey: PropertyKey.desc)
-        aCoder.encode(date, forkey: PropertyKey.date)
-        aCoder.encode(completed, forKey: PropertyKey.completed)
-        aCoder.encode(image, forKey: PropertyKey.image)
+        aCoder.encode(toDoItem.name, forKey: PropertyKey.name)
+        aCoder.encode(toDoItem.desc, forKey: PropertyKey.desc)
+        aCoder.encode(toDoItem.dateCreated, forKey: PropertyKey.dateCreated)
+        aCoder.encode(toDoItem.completed, forKey: PropertyKey.completed)
+        aCoder.encode(toDoItem.image, forKey: PropertyKey.image)
+        aCoder.encode(toDoItem.dateDue, forKey: PropertyKey.dateDue)
+        aCoder.encode(toDoItem.location, forKey: PropertyKey.location)
     }
     
     required convenience init?(coder aDecoder: NSCoder){
         let name = aDecoder.decodeObject(forKey: PropertyKey.name) as! String
         let desc = aDecoder.decodeObject(forKey: PropertyKey.desc) as! String
-        let date = aDecoder.decodeObject(forKey: PropertyKey.name) as! String
+        let dateCreated = aDecoder.decodeObject(forKey: PropertyKey.dateCreated) as! Date
         let completed = aDecoder.decodeBool(forKey: PropertyKey.completed)
         let image = aDecoder.decodeObject(forKey: PropertyKey.image) as! UIImage
+        let dateDue = aDecoder.decodeObject(forKey: PropertyKey.dateDue) as! Date
+        let location = aDecoder.decodeObject(forKey: PropertyKey.location) as! String
         
-        self.init(name: name, desc: desc, date: date, image: image, completed: completed)
+        self.init(name: name, desc: desc, dateCreated: dateCreated, image: image, completed: completed, dateDue: dateDue, location: location)
     }
     
     

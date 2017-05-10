@@ -10,10 +10,8 @@ import UIKit
 
 class ToDoFirstTableViewController: UITableViewController {
     
-    var toDoManager: ToDo = ToDo(name: "todo", desc: "todo at a certain time", date: "01-01-01", image: #imageLiteral(resourceName: "defaultImage"), completed: false)!
     
     var selectedCellIndex = Int()
-    //var toDoManager = ToDo()
     
     @IBOutlet var toDoTable: UITableView!
     
@@ -86,21 +84,27 @@ class ToDoFirstTableViewController: UITableViewController {
             
             //split processing between uodating vs adding new item
             if sourceViewController.isEditMode {
-                toDoManager.toDoItems[selectedCellIndex].date = sourceViewController.toDoDateLbl.text
-                toDoManager.toDoItems[selectedCellIndex].name = sourceViewController.toDoNameTxFd.text
-                toDoManager.toDoItems[selectedCellIndex].desc = sourceViewController.toDoDescTxVw.text
+                toDoManager.toDoItems[selectedCellIndex].dateCreated = sourceViewController.tCreatedDate
+                toDoManager.toDoItems[selectedCellIndex].name = sourceViewController.toDoNameTxFd.text!
+                toDoManager.toDoItems[selectedCellIndex].desc = sourceViewController.toDoDescTxVw.text!
                 toDoManager.toDoItems[selectedCellIndex].image = sourceViewController.toDoImageUImg.image!
                 toDoManager.toDoItems[selectedCellIndex].completed = sourceViewController.toDoCompleteSw.isOn
+                toDoManager.toDoItems[selectedCellIndex].dateDue = sourceViewController.tDueDate!
+                toDoManager.toDoItems[selectedCellIndex].location = sourceViewController.toDoLocation.text!
                 toDoTable.reloadData()
             }
             else {
+                
                 toDoManager.addToDo(name: sourceViewController.toDoNameTxFd.text!,
                                     desc: sourceViewController.toDoDescTxVw.text!,
-                                    date: sourceViewController.toDoDateLbl.text!,
+                                    dateCreated: sourceViewController.tCreatedDate!,
                                     complete: sourceViewController.toDoCompleteSw.isOn,
-                                    image: sourceViewController.toDoImageUImg.image!)
+                                    image: sourceViewController.toDoImageUImg.image!,
+                                    dateDue: sourceViewController.tDueDate!,
+                                    location: sourceViewController.toDoLocation.text!)
                 toDoTable.reloadData()
             }
+            
         }
     }
 }
