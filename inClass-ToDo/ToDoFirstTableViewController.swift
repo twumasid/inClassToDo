@@ -38,6 +38,14 @@ class ToDoFirstTableViewController: UITableViewController {
         cell.toDoTaskName.text = toDoManager.toDoItems[indexPath.row].name
         cell.toDoTaskDesc.text = toDoManager.toDoItems[indexPath.row].desc
         cell.toDoImageUImg.image = toDoManager.toDoItems[indexPath.row].image
+        
+        //alternate cell background color
+        if (indexPath.row % 2 == 0){
+            cell.backgroundColor = UIColor.white
+        }
+        else{
+            cell.backgroundColor = UIColor.lightGray
+        }
         return cell
     }
     

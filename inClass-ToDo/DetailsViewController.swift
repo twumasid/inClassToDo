@@ -66,8 +66,7 @@ class DetailsViewController: UIViewController, UIImagePickerControllerDelegate, 
     override func viewDidLoad() {
         if isEditMode {
             
-            //not working
-            //self.navigationItem.title =
+            self.navigationItem.title = currentToDoItem.name
             //self.navigationBar.topItem.title = "New Title"
             
             toDoDateLbl.text = generateCustomDateFormat(date: currentToDoItem.dateCreated!)
