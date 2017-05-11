@@ -7,9 +7,16 @@
 //
 
 import UIKit
+import MapKit
 
 class MapViewController: UIViewController {
 
+    
+    @IBAction func cancelMapsView(_ sender: Any) {
+        dismiss(animated: true, completion: nil)
+    }
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 

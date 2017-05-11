@@ -70,17 +70,7 @@ class ToDo: NSObject, NSCoding {
     //append app location to root directory
     static let ArchiveURL = DocumentsDirectory.appendingPathComponent("todos")
     
-    private func saveToDos() {
-        let isSuccessfulSave = NSKeyedArchiver.archiveRootObject(toDoItemType(), toFile: ToDo.ArchiveURL.path)
-        
-        if isSuccessfulSave {
-            print ("saved")
-        }
-        else {
-            print("DEFCON 5!!! Failed to save Todos.")
-        }
-        
-    }
+
     
     private func loadTodos() -> [ToDo]?{
         return NSKeyedUnarchiver.unarchiveObject(withFile: ToDo.ArchiveURL.path) as? [ToDo]

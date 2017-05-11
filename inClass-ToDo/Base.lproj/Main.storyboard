@@ -72,6 +72,9 @@
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <segue destination="PK6-L6-Kbc" kind="show" identifier="selectToDoLocation" id="95g-Jo-c6f"/>
+                                </connections>
                             </textField>
                             <imageView clipsSubviews="YES" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="defaultImage" translatesAutoresizingMaskIntoConstraints="NO" id="ZSf-U2-hSG">
                                 <rect key="frame" x="20" y="377" width="370" height="224"/>
@@ -131,7 +134,76 @@
                 </tapGestureRecognizer>
                 <exit id="o5F-Eu-f7n" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="4105.7971014492759" y="86.413043478260875"/>
+            <point key="canvasLocation" x="4226" y="86"/>
+        </scene>
+        <!--Map View Controller-->
+        <scene sceneID="rns-JG-jDN">
+            <objects>
+                <viewController id="PK6-L6-Kbc" customClass="MapViewController" customModule="inClass_ToDo" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="exT-13-K7T"/>
+                        <viewControllerLayoutGuide type="bottom" id="Pw2-YH-qrb"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="iYr-f6-p7l">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NH7-My-JvL">
+                                <rect key="frame" x="0.0" y="28" width="414" height="44"/>
+                                <items>
+                                    <navigationItem title="Title" id="kaX-A0-awR">
+                                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="IWy-xo-i91">
+                                            <connections>
+                                                <action selector="cancelMapsView:" destination="PK6-L6-Kbc" id="TKR-dz-opo"/>
+                                            </connections>
+                                        </barButtonItem>
+                                        <barButtonItem key="rightBarButtonItem" systemItem="done" id="fqi-XH-Zga">
+                                            <connections>
+                                                <segue destination="SNX-Og-usN" kind="unwind" unwindAction="unwindToDetailsViewWithSender:" id="MED-fX-Ba7"/>
+                                            </connections>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="5s5-kP-Xvw">
+                                <rect key="frame" x="0.0" y="116" width="414" height="620"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </mapView>
+                            <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="Ok6-iW-WAh">
+                                <rect key="frame" x="0.0" y="72" width="414" height="44"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <outlet property="delegate" destination="PK6-L6-Kbc" id="fFo-me-CDl"/>
+                                </connections>
+                            </searchBar>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="NH7-My-JvL" firstAttribute="leading" secondItem="iYr-f6-p7l" secondAttribute="leading" id="2qJ-n5-0ud"/>
+                            <constraint firstItem="Ok6-iW-WAh" firstAttribute="top" secondItem="NH7-My-JvL" secondAttribute="bottom" id="5Y1-nL-tBv"/>
+                            <constraint firstAttribute="trailing" secondItem="NH7-My-JvL" secondAttribute="trailing" id="Bsu-Am-PU9"/>
+                            <constraint firstItem="NH7-My-JvL" firstAttribute="top" secondItem="exT-13-K7T" secondAttribute="bottom" constant="8" id="FQy-zF-nIj"/>
+                            <constraint firstItem="Ok6-iW-WAh" firstAttribute="leading" secondItem="iYr-f6-p7l" secondAttribute="leading" id="TUG-JW-pzZ"/>
+                            <constraint firstAttribute="trailing" secondItem="Ok6-iW-WAh" secondAttribute="trailing" id="e6y-Uf-wNo"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="searchDisplayController" destination="Ux6-2K-RUL" id="RPm-AY-k6f"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="RWr-aM-LoJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="SNX-Og-usN" userLabel="Exit" sceneMemberID="exit"/>
+                <searchDisplayController id="Ux6-2K-RUL">
+                    <connections>
+                        <outlet property="delegate" destination="PK6-L6-Kbc" id="2bk-Dh-DhJ"/>
+                        <outlet property="searchBar" destination="Ok6-iW-WAh" id="UvS-3w-Yw7"/>
+                        <outlet property="searchContentsController" destination="PK6-L6-Kbc" id="pti-zw-eLm"/>
+                        <outlet property="searchResultsDataSource" destination="PK6-L6-Kbc" id="vL0-4m-f40"/>
+                        <outlet property="searchResultsDelegate" destination="PK6-L6-Kbc" id="Qdz-5k-PSf"/>
+                    </connections>
+                </searchDisplayController>
+            </objects>
+            <point key="canvasLocation" x="5056.521739130435" y="86.413043478260875"/>
         </scene>
         <!--todo list-->
         <scene sceneID="pWE-DZ-gLK">
@@ -146,7 +218,7 @@
                                 <rect key="frame" x="0.0" y="28" width="414" height="100"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="NoK-aR-UVW" id="rcG-Nj-LPb">
-                                    <rect key="frame" x="0.0" y="0.0" width="414" height="100"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="99.666666666666671"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Pxj-v5-O8f">

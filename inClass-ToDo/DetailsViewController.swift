@@ -112,6 +112,8 @@ class DetailsViewController: UIViewController, UIImagePickerControllerDelegate, 
         //populate location with location picker
             //execute some cute here
         
+        //toDoLocation.inputView =
+        
         
         super.viewDidLoad()
     }
@@ -135,6 +137,7 @@ class DetailsViewController: UIViewController, UIImagePickerControllerDelegate, 
         toDoCreatedOnLabel.textColor = UIColor.red
         toDoCreatedOnLabel.text = "Complete"
         toDoDateLbl.text = "Created: " + toDoDateLbl.text!
+        toDoCompleteSw.onTintColor = UIColor.red
      }
     
 //    //remove keyboard if focus is off editing field
@@ -147,6 +150,12 @@ class DetailsViewController: UIViewController, UIImagePickerControllerDelegate, 
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    @IBAction func unwindToDetailsView(sender: UIStoryboardSegue){
+    
+    
+    }
+    
     
     //UITextField Delegate, hides keyboard when you hit return
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
