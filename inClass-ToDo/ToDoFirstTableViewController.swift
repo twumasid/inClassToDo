@@ -15,6 +15,12 @@ class ToDoFirstTableViewController: UITableViewController {
     
     @IBOutlet var toDoTable: UITableView!
     
+//    let sections = ["Incomplete","Complete"]
+//    
+//    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+//        return sections[section]
+//    }
+
     
     //Conform to UITablekit Protocol
     public override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int{
@@ -24,6 +30,7 @@ class ToDoFirstTableViewController: UITableViewController {
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
         return 1
+        //return sections.count
     }
     
     public override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell{
@@ -82,26 +89,28 @@ class ToDoFirstTableViewController: UITableViewController {
     @IBAction func unwindToToDoList(sender: UIStoryboardSegue){
         if let sourceViewController = sender.source as? DetailsViewController {
             
-            //split processing between uodating vs adding new item
+            //split processing between updating vs adding new item
             if sourceViewController.isEditMode {
                 toDoManager.toDoItems[selectedCellIndex].dateCreated = sourceViewController.tCreatedDate
                 toDoManager.toDoItems[selectedCellIndex].name = sourceViewController.toDoNameTxFd.text!
                 toDoManager.toDoItems[selectedCellIndex].desc = sourceViewController.toDoDescTxVw.text!
                 toDoManager.toDoItems[selectedCellIndex].image = sourceViewController.toDoImageUImg.image!
                 toDoManager.toDoItems[selectedCellIndex].completed = sourceViewController.toDoCompleteSw.isOn
-                toDoManager.toDoItems[selectedCellIndex].dateDue = sourceViewController.tDueDate!
+                toDoManager.toDoItems[selectedCellIndex].dateDue = sourceViewController.tDueDate
                 toDoManager.toDoItems[selectedCellIndex].location = sourceViewController.toDoLocation.text!
+                
                 toDoTable.reloadData()
             }
             else {
                 
                 toDoManager.addToDo(name: sourceViewController.toDoNameTxFd.text!,
                                     desc: sourceViewController.toDoDescTxVw.text!,
-                                    dateCreated: sourceViewController.tCreatedDate!,
+                                    dateCreated: sourceViewController.tCreatedDate,
                                     complete: sourceViewController.toDoCompleteSw.isOn,
                                     image: sourceViewController.toDoImageUImg.image!,
-                                    dateDue: sourceViewController.tDueDate!,
+                                    dateDue: sourceViewController.tDueDate,
                                     location: sourceViewController.toDoLocation.text!)
+
                 toDoTable.reloadData()
             }
             

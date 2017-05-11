@@ -17,12 +17,11 @@ class DetailsViewController: UIViewController, UIImagePickerControllerDelegate, 
     var currentToDoItem = toDoItemType()
     
     //temporary placeholders to allow date manipulation
-    var tCreatedDate: Date?
-    var tDueDate : Date?
+    var tCreatedDate = Date()
+    var tDueDate = Date()
     
     //Interface outlets
- 
-    @IBOutlet var toDoCreatedOnLabel: UIView!
+    @IBOutlet weak var toDoCreatedOnLabel: UILabel!
     @IBOutlet weak var toDoDateLbl: UILabel!
     @IBOutlet weak var toDoNameTxFd: UITextField!
     @IBOutlet weak var toDoDescTxVw: UITextView!
@@ -57,10 +56,10 @@ class DetailsViewController: UIViewController, UIImagePickerControllerDelegate, 
     }
    
     //generate date format
-    func generateCustomDateFormat(date: Date) -> String {
+    func generateCustomDateFormat(date: Date?) -> String {
         let dateFormatter = DateFormatter()
         dateFormatter.dateStyle = DateFormatter.Style.medium
-        let customDate = dateFormatter.string(from: date)
+        let customDate = dateFormatter.string(from: date!)
         return customDate
     }
     
@@ -79,12 +78,18 @@ class DetailsViewController: UIViewController, UIImagePickerControllerDelegate, 
             toDoDueDate.text = generateCustomDateFormat(date: currentToDoItem.dateDue!)
             toDoLocation.text = currentToDoItem.location
             
+            
+            
             let dueDateCheck = Date().compare(currentToDoItem.dateDue!)
             switch dueDateCheck {
                 case .orderedAscending:
-                    toDoDueDate.textColor = UIColor.red
-                case .orderedDescending:
+                    //over due event
                     toDoDueDate.textColor = UIColor.green
+                
+                case .orderedDescending:
+                    //not yet due
+                    toDoDueDate.textColor = UIColor.red
+                    //due today
                 case .orderedSame:
                     toDoDueDate.textColor = UIColor.yellow
             }
@@ -96,7 +101,7 @@ class DetailsViewController: UIViewController, UIImagePickerControllerDelegate, 
             
         else{
             self.tCreatedDate = Date()
-            toDoDateLbl.text = generateCustomDateFormat(date: self.tCreatedDate!)
+            toDoDateLbl.text = generateCustomDateFormat(date: self.tCreatedDate)
         }
         
         //populate due date with UIDatePicker
@@ -106,8 +111,16 @@ class DetailsViewController: UIViewController, UIImagePickerControllerDelegate, 
         datePickerView.addTarget(self, action: #selector(DetailsViewController.datePickerValueChanged), for: UIControlEvents.valueChanged)
         
         //populate location with location picker
+            //execute some cute here
+        
         
         super.viewDidLoad()
+    }
+    
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        if toDoDescTxVw.text == "Description" {
+            toDoDescTxVw.text = ""
+        }
     }
     
     func datePickerValueChanged(sender:UIDatePicker){
@@ -115,24 +128,21 @@ class DetailsViewController: UIViewController, UIImagePickerControllerDelegate, 
         dateFormatter.dateStyle = DateFormatter.Style.medium
         dateFormatter.timeStyle = DateFormatter.Style.none
         self.tDueDate = sender.date
-        toDoDueDate.text = dateFormatter.string(from: self.tDueDate!)
+        toDoDueDate.text = dateFormatter.string(from: self.tDueDate)
     }
     
     //change some display attibutes if task is complete
     func todoCompleted() {
-        //ccxc
-    }
+        toDoCreatedOnLabel.textColor = UIColor.red
+        toDoCreatedOnLabel.text = "Complete"
+        toDoDateLbl.text = "Created: " + toDoDateLbl.text!
+     }
     
-    //remove keyboard if focus is off editing field
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        //toDoTaskLbl.text = toDoNameTxFd.text
-        self.view.endEditing(true)
-    }
-    
-    //update task label when task name is set
-    func textFieldDidEndEditing(_ textField: UITextField) {
-        //toDoTaskLbl.text = toDoNameTxFd.text
-    }
+//    //remove keyboard if focus is off editing field
+//    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+//        //toDoTaskLbl.text = toDoNameTxFd.text
+//        self.view.endEditing(true)
+//    }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

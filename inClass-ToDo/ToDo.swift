@@ -26,7 +26,7 @@ class ToDo: NSObject, NSCoding {
     //var to contain one toDo Item
     var toDoItem = toDoItemType()
     
-    //an array to contain all toDo items in app
+    //an array to hold all toDo items in app
     var toDoItems = [toDoItemType]()
     
     
@@ -52,8 +52,8 @@ class ToDo: NSObject, NSCoding {
         self.toDoItem.location = location
     }
     
-    func addToDo (name: String, desc: String?, dateCreated: Date, complete: Bool, image: UIImage, dateDue: Date?, location: String?) {
-        toDoItems.append(toDoItemType(name: name, desc: desc, dateCreated: dateCreated, completed: complete, image: image, dateDue: dateDue, location: location))
+    func addToDo (name: String, desc: String?, dateCreated: Date?, complete: Bool, image: UIImage, dateDue: Date?, location: String?) {
+        toDoItems.append(toDoItemType(name: name, desc: desc, dateCreated: dateCreated!, completed: complete, image: image, dateDue: dateDue, location: location))
     }
     
     func addToDoItem (toDo: toDoItemType) {
