@@ -116,6 +116,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="navigationBar" destination="HW2-1y-Oas" id="hmI-ZK-fqX"/>
                         <outlet property="toDoCompleteSw" destination="E7M-u2-EYG" id="KgO-8g-5si"/>
                         <outlet property="toDoCreatedOnLabel" destination="Oli-yM-RFJ" id="3T8-BZ-a0i"/>
                         <outlet property="toDoDateLbl" destination="Goe-UG-X3H" id="zet-mr-g8E"/>
@@ -218,7 +219,7 @@
                                 <rect key="frame" x="0.0" y="28" width="414" height="100"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="NoK-aR-UVW" id="rcG-Nj-LPb">
-                                    <rect key="frame" x="0.0" y="0.0" width="414" height="99.666666666666671"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="100"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Pxj-v5-O8f">

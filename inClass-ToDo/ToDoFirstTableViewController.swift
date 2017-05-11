@@ -24,7 +24,7 @@ class ToDoFirstTableViewController: UITableViewController {
     
     //Conform to UITablekit Protocol
     public override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int{
-        return toDoManager.toDoItems.count
+        return ToDo.toDoManager.toDoItems.count
     }
     
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -35,9 +35,9 @@ class ToDoFirstTableViewController: UITableViewController {
     
     public override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell{
         let cell = tableView.dequeueReusableCell(withIdentifier: "ToDoTableViewCell", for: indexPath) as! ToDoTableViewCell
-        cell.toDoTaskName.text = toDoManager.toDoItems[indexPath.row].name
-        cell.toDoTaskDesc.text = toDoManager.toDoItems[indexPath.row].desc
-        cell.toDoImageUImg.image = toDoManager.toDoItems[indexPath.row].image
+        cell.toDoTaskName.text = ToDo.toDoManager.toDoItems[indexPath.row].name
+        cell.toDoTaskDesc.text = ToDo.toDoManager.toDoItems[indexPath.row].desc
+        cell.toDoImageUImg.image = ToDo.toDoManager.toDoItems[indexPath.row].image
         
         //alternate cell background color
         if (indexPath.row % 2 == 0){
@@ -57,7 +57,7 @@ class ToDoFirstTableViewController: UITableViewController {
     //UITableViewDeleteItem
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if (editingStyle == UITableViewCellEditingStyle.delete) {
-            toDoManager.toDoItems.remove(at: indexPath.row)
+            ToDo.toDoManager.toDoItems.remove(at: indexPath.row)
             toDoTable.reloadData()
         }
     }
@@ -83,7 +83,7 @@ class ToDoFirstTableViewController: UITableViewController {
         
         case "showDetails":
             let selectedIndexPath = tableView.indexPathForSelectedRow
-            let selectedToDoItem = toDoManager.toDoItems[(selectedIndexPath?.row)!]
+            let selectedToDoItem = ToDo.toDoManager.toDoItems[(selectedIndexPath?.row)!]
             let destVwController = segue.destination as! DetailsViewController
             destVwController.isEditMode = true
             destVwController.currentToDoItem = selectedToDoItem
@@ -99,19 +99,19 @@ class ToDoFirstTableViewController: UITableViewController {
             
             //split processing between updating vs adding new item
             if sourceViewController.isEditMode {
-                toDoManager.toDoItems[selectedCellIndex].dateCreated = sourceViewController.tCreatedDate
-                toDoManager.toDoItems[selectedCellIndex].name = sourceViewController.toDoNameTxFd.text!
-                toDoManager.toDoItems[selectedCellIndex].desc = sourceViewController.toDoDescTxVw.text!
-                toDoManager.toDoItems[selectedCellIndex].image = sourceViewController.toDoImageUImg.image!
-                toDoManager.toDoItems[selectedCellIndex].completed = sourceViewController.toDoCompleteSw.isOn
-                toDoManager.toDoItems[selectedCellIndex].dateDue = sourceViewController.tDueDate
-                toDoManager.toDoItems[selectedCellIndex].location = sourceViewController.toDoLocation.text!
+                ToDo.toDoManager.toDoItems[selectedCellIndex].dateCreated = sourceViewController.tCreatedDate
+                ToDo.toDoManager.toDoItems[selectedCellIndex].name = sourceViewController.toDoNameTxFd.text!
+                ToDo.toDoManager.toDoItems[selectedCellIndex].desc = sourceViewController.toDoDescTxVw.text!
+                ToDo.toDoManager.toDoItems[selectedCellIndex].image = sourceViewController.toDoImageUImg.image!
+                ToDo.toDoManager.toDoItems[selectedCellIndex].completed = sourceViewController.toDoCompleteSw.isOn
+                ToDo.toDoManager.toDoItems[selectedCellIndex].dateDue = sourceViewController.tDueDate
+                ToDo.toDoManager.toDoItems[selectedCellIndex].location = sourceViewController.toDoLocation.text!
                 
                 toDoTable.reloadData()
             }
             else {
                 
-                toDoManager.addToDo(name: sourceViewController.toDoNameTxFd.text!,
+                ToDo.toDoManager.addToDo(name: sourceViewController.toDoNameTxFd.text!,
                                     desc: sourceViewController.toDoDescTxVw.text!,
                                     dateCreated: sourceViewController.tCreatedDate,
                                     complete: sourceViewController.toDoCompleteSw.isOn,

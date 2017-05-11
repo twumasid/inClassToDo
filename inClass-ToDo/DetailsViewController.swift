@@ -20,6 +20,8 @@ class DetailsViewController: UIViewController, UIImagePickerControllerDelegate, 
     var tCreatedDate = Date()
     var tDueDate = Date()
     
+    @IBOutlet weak var navigationBar: UINavigationBar!
+    
     //Interface outlets
     @IBOutlet weak var toDoCreatedOnLabel: UILabel!
     @IBOutlet weak var toDoDateLbl: UILabel!
@@ -63,10 +65,17 @@ class DetailsViewController: UIViewController, UIImagePickerControllerDelegate, 
         return customDate
     }
     
+    
+    
+    
     override func viewDidLoad() {
+        
+        super.viewDidLoad()
+        
         if isEditMode {
             
-            self.navigationItem.title = currentToDoItem.name
+        
+            navigationBar.topItem?.title = currentToDoItem.name
             //self.navigationBar.topItem.title = "New Title"
             
             toDoDateLbl.text = generateCustomDateFormat(date: currentToDoItem.dateCreated!)
@@ -115,7 +124,7 @@ class DetailsViewController: UIViewController, UIImagePickerControllerDelegate, 
         //toDoLocation.inputView =
         
         
-        super.viewDidLoad()
+
     }
     
     func textViewDidBeginEditing(_ textView: UITextView) {

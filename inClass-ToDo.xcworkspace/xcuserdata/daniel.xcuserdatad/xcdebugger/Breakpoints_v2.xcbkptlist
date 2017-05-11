@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "inClass-ToDo/DetailsViewController.swift"
-            timestampString = "516207428.396198"
+            timestampString = "516212778.917811"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "141"
-            endingLineNumber = "141"
+            startingLineNumber = "150"
+            endingLineNumber = "150"
             landmarkName = "todoCompleted()"
             landmarkType = "7">
          </BreakpointContent>
