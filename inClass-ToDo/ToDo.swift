@@ -117,7 +117,7 @@ class ToDo: NSObject, NSCoding {
         let dateDue = aDecoder.decodeObject(forKey: PropertyKey.dateDue) as! Date
         let location = aDecoder.decodeObject(forKey: PropertyKey.location) as! String
         
-        self.init(name: name, desc: desc, dateCreated: dateCreated,  completed: isCompleted, image: image,dateDue: dateDue, location: location)
+        self.init(name: name, desc: desc, dateCreated: dateCreated, completed: isCompleted, image: image,dateDue: dateDue, location: location)
     }
     
     
